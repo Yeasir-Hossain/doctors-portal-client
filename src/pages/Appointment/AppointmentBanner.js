@@ -5,7 +5,7 @@ import 'react-day-picker/dist/style.css';
 
 const AppointmentBanner = ({date,setDate}) => {
     return (
-        <div class="hero min-h-screen">
+        <div class="hero min-h-screen bg-[url('/src/assets/images/bg.png')]">
             <div class="hero-content flex-col lg:flex-row-reverse">
                 <img src={chair} className="max-w-sm rounded-lg shadow-2xl" alt="" />
                 <div>
@@ -13,6 +13,7 @@ const AppointmentBanner = ({date,setDate}) => {
                         mode="single"
                         selected={date}
                         onSelect={setDate}
+                        required
                     />
                 </div>
             </div>
