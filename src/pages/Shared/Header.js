@@ -9,6 +9,7 @@ const Header = () => {
 
     const logout = () => {
         signOut(auth);
+        localStorage.removeItem('accessToken')
     };
     const menuItems = <>
         <li><Link to='/' className="btn text-[#D4D9E3] font-bold">Home</Link></li>
