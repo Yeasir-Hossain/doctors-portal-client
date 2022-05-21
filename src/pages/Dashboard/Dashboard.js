@@ -7,7 +7,6 @@ import useAdmin from '../../hooks/useAdmin';
 const Dashboard = () => {
   const [user] = useAuthState(auth)
   const [isAdmin] = useAdmin(user);
-  console.log(isAdmin);
   return (
     <div className="drawer drawer-mobile">
       <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle" />
@@ -16,7 +15,7 @@ const Dashboard = () => {
         <Outlet></Outlet>
       </div>
       <div className="drawer-side">
-        <label for="dashboard-sidebar" className="drawer-overlay"></label>
+        <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>
         <ul className="menu p-4 overflow-y-auto w-50 bg-base-100 text-base-content">
           <li className='hover-bordered'><Link to='/dashboard'>My Appointments</Link></li>
           <li className='hover-bordered'><Link to='/dashboard/review'>My Reviews</Link></li>
