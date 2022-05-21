@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { signOut } from 'firebase/auth';
 
 const MyAppointments = () => {
@@ -19,7 +18,6 @@ const MyAppointments = () => {
         })
             .then(res => {
                 if (res.status === 401 || res.status === 403) {
-                    toast("UnAuthorized access")
                     signOut(auth);
                     localStorage.removeItem('accessToken')
                     navigate('/');
@@ -29,10 +27,10 @@ const MyAppointments = () => {
             .then(data => {
                 setAppointments(data)
             })
-    }, [user])
+    }, [user,navigate])
     return (
         <div>
-            <h1>My appointments:{appointments.length}</h1>
+            <h1 className='text-2xl'>My appointments:{appointments.length}</h1>
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
 

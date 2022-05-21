@@ -15,6 +15,8 @@ import MyReview from './pages/Dashboard/MyReview';
 import Users from './pages/Dashboard/Users';
 import History from './pages/Dashboard/History';
 import RequireAdmin from './pages/Login/RequireAdmin';
+import AddDoctor from './pages/Dashboard/AddDoctor';
+import ManageDoctors from './pages/Dashboard/ManageDoctors';
 
 
 function App() {
@@ -38,6 +40,8 @@ function App() {
           <Route path='review' element={<MyReview></MyReview>}></Route>
           <Route path='history' element={<History></History>}></Route>
           <Route path='users' element={<RequireAdmin><Users></Users></RequireAdmin>}></Route>
+          <Route path='addDoctor' element={<RequireAdmin><AddDoctor></AddDoctor></RequireAdmin>}></Route>
+          <Route path='manageDoctor' element={<RequireAdmin><ManageDoctors></ManageDoctors></RequireAdmin>}></Route>
         </Route>
       </Routes>
       <ToastContainer />

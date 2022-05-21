@@ -7,7 +7,7 @@ const UserRow = ({ user, index, refetch }) => {
         fetch(`https://still-temple-47292.herokuapp.com/user/admin/${email}`, {
             method: 'PUT',
             headers: {
-                'authorization': localStorage.getItem('accessToken')
+                authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
             .then(res => {

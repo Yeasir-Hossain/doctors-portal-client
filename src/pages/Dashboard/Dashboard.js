@@ -20,7 +20,12 @@ const Dashboard = () => {
           <li className='hover-bordered'><Link to='/dashboard'>My Appointments</Link></li>
           <li className='hover-bordered'><Link to='/dashboard/review'>My Reviews</Link></li>
           <li className='hover-bordered'><Link to='/dashboard/history'>My History</Link></li>
-          {isAdmin && <li className='hover-bordered'><Link to='/dashboard/users'>All Users</Link></li>}
+          {isAdmin && <>
+            <li className='hover-bordered'><Link to='/dashboard/users'>All Users</Link></li>
+            <li className='hover-bordered'><Link to='/dashboard/addDoctor'>Add a New Doctor</Link></li>
+            <li className='hover-bordered'><Link to='/dashboard/manageDoctor'>Manage Doctors</Link></li>
+            </>
+            }
         </ul>
 
       </div>
