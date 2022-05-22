@@ -15,7 +15,7 @@ const AddDoctor = () => {
      * file validation:YUP:yup file validation for react hook form 
     **/
 
-    const { data: services, isLoading } = useQuery('services', () => fetch(`http://localhost:5000/service`).then(res => res.json()))
+    const { data: services, isLoading } = useQuery('services', () => fetch(`https://still-temple-47292.herokuapp.com/service`).then(res => res.json()))
     const imgStorageKey = 'd7274c5a1d7d29e08b6cec27d3e2d1a0'
 
     if (isLoading) {
@@ -42,7 +42,7 @@ const AddDoctor = () => {
                         image: image
                     }
                     ///sending data to server
-                    fetch(`http://localhost:5000/doctor`,{
+                    fetch(`https://still-temple-47292.herokuapp.com/doctor`,{
                         method:'POST',
                         headers:{
                             'content-type':'application/json',

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import Loading from '../Shared/Loading';
 
 const CheckoutForm = ({ appointment }) => {
     const stripe = useStripe()
@@ -11,7 +12,7 @@ const CheckoutForm = ({ appointment }) => {
     const [processing, setProcessing] = useState(false);
     const {_id, price, patient, patientName } = appointment
     useEffect(() => {
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://still-temple-47292.herokuapp.com/create-payment-intent", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -35,7 +36,7 @@ const CheckoutForm = ({ appointment }) => {
         if (card == null) {
             return;
         }
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        const { error} = await stripe.createPaymentMethod({
             type: 'card',
             card,
         });
@@ -43,6 +44,9 @@ const CheckoutForm = ({ appointment }) => {
         setCardError(error?.message || '');
         setSuccess('')
         setProcessing(true)
+        if(processing){
+            return <Loading></Loading>
+        }
         //confirm card payment
         const { paymentIntent, error: intentError } = await stripe.confirmCardPayment(
             clientSecret,
@@ -68,9 +72,9 @@ const CheckoutForm = ({ appointment }) => {
             //payment info
             const payment = {
                 appointment: _id,
-                transactionID:paymentIntent.id
+                transactionId:paymentIntent.id
             }
-            fetch(`http://localhost:5000/booking/${_id}`,{
+            fetch(`https://still-temple-47292.herokuapp.com/booking/${_id}`,{
                 method:"PATCH",
                 headers: {
                     "content-type": "application/json",
