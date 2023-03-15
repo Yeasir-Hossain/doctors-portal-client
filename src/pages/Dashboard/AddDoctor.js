@@ -5,7 +5,7 @@ import Loading from '../Shared/Loading';
 import { toast } from 'react-toastify';
 
 const AddDoctor = () => {
-    const { register, formState: { errors }, handleSubmit,reset } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
     /**
      * third party storage(imgbb)
@@ -15,7 +15,7 @@ const AddDoctor = () => {
      * file validation:YUP:yup file validation for react hook form 
     **/
 
-    const { data: services, isLoading } = useQuery('services', () => fetch(`https://still-temple-47292.herokuapp.com/service`).then(res => res.json()))
+    const { data: services, isLoading } = useQuery('services', () => fetch(`https://doctors-portal-jzhn.onrender.com/service`).then(res => res.json()))
     const imgStorageKey = 'd7274c5a1d7d29e08b6cec27d3e2d1a0'
 
     if (isLoading) {
@@ -42,24 +42,24 @@ const AddDoctor = () => {
                         image: image
                     }
                     ///sending data to server
-                    fetch(`https://still-temple-47292.herokuapp.com/doctor`,{
-                        method:'POST',
-                        headers:{
-                            'content-type':'application/json',
+                    fetch(`https://doctors-portal-jzhn.onrender.com/doctor`, {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
                             authorization: `Bearer ${localStorage.getItem('accessToken')}`
                         },
-                        body:JSON.stringify(doctor)
+                        body: JSON.stringify(doctor)
                     })
-                    .then(res=>res.json())
-                    .then(inserted=>{
-                        if(inserted._id){
-                            toast.success("Doctor added successfully")
-                            reset()
-                        }
-                        else{
-                            toast.error("Failed to add")
-                        }
-                    })
+                        .then(res => res.json())
+                        .then(inserted => {
+                            if (inserted._id) {
+                                toast.success("Doctor added successfully")
+                                reset()
+                            }
+                            else {
+                                toast.error("Failed to add")
+                            }
+                        })
                 }
             })
     }

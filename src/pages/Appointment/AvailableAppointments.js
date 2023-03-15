@@ -8,8 +8,8 @@ import Loading from '../Shared/Loading';
 const AvailableAppointments = ({ date }) => {
     const [treatment, setTreatment] = useState(null)
     const formattedDate = format(date, 'PP');
-    const { isLoading, data: services,refetch } = useQuery(['available',formattedDate], () =>
-        fetch(`https://still-temple-47292.herokuapp.com/available?date=${formattedDate}`)
+    const { isLoading, data: services, refetch } = useQuery(['available', formattedDate], () =>
+        fetch(`https://doctors-portal-jzhn.onrender.com/available?date=${formattedDate}`)
             .then(res => res.json())
     )
     if (isLoading) {
@@ -27,11 +27,11 @@ const AvailableAppointments = ({ date }) => {
                     ></Service>)
                 }
             </div>
-            {treatment && <BookingModal 
-            setTreatment={setTreatment} 
-            date={date} 
-            treatment={treatment}
-            refetch = {refetch}
+            {treatment && <BookingModal
+                setTreatment={setTreatment}
+                date={date}
+                treatment={treatment}
+                refetch={refetch}
             ></BookingModal>}
         </div>
     );

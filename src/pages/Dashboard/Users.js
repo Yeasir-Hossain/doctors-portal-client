@@ -3,10 +3,10 @@ import { useQuery } from 'react-query'
 import Loading from '../Shared/Loading';
 import UserRow from './UserRow';
 const Users = () => {
-    const { isLoading, data: users,refetch} = useQuery(['users'], () =>
-        fetch(`https://still-temple-47292.herokuapp.com/user`,{
-            method:'GET',
-            headers:{
+    const { isLoading, data: users, refetch } = useQuery(['users'], () =>
+        fetch(`https://doctors-portal-jzhn.onrender.com/user`, {
+            method: 'GET',
+            headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
             }
         })
@@ -32,10 +32,10 @@ const Users = () => {
                     <tbody>
                         {
                             users.map((user, index) => <UserRow
-                            key={user._id}
-                            user={user}
-                            index={index}
-                            refetch ={refetch}>
+                                key={user._id}
+                                user={user}
+                                index={index}
+                                refetch={refetch}>
                             </UserRow>)
                         }
                     </tbody>

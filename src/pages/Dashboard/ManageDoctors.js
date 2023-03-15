@@ -5,9 +5,9 @@ import DeleteConfirm from './DeleteConfirm';
 import DoctorRow from './DoctorRow';
 
 const ManageDoctors = () => {
-    const [deletingDoctor,setDeletingDoctor] = useState(null)
+    const [deletingDoctor, setDeletingDoctor] = useState(null)
     const { isLoading, data: doctors, refetch } = useQuery(['doctors'], () =>
-        fetch(`https://still-temple-47292.herokuapp.com/doctor`, {
+        fetch(`https://doctors-portal-jzhn.onrender.com/doctor`, {
             method: 'GET',
             headers: {
                 'authorization': `Bearer ${localStorage.getItem('accessToken')}`
@@ -33,11 +33,11 @@ const ManageDoctors = () => {
                     </thead>
                     <tbody>
                         {
-                            doctors.map((doctor,index)=><DoctorRow
-                            key={doctor._id}
-                            index={index}
-                            doctor={doctor}
-                            setDeletingDoctor={setDeletingDoctor}
+                            doctors.map((doctor, index) => <DoctorRow
+                                key={doctor._id}
+                                index={index}
+                                doctor={doctor}
+                                setDeletingDoctor={setDeletingDoctor}
                             >
                             </DoctorRow>)
                         }
@@ -45,9 +45,9 @@ const ManageDoctors = () => {
                 </table>
             </div>
             {deletingDoctor && <DeleteConfirm
-            deletingDoctor={deletingDoctor}
-            refetch={refetch}
-            setDeletingDoctor={setDeletingDoctor}
+                deletingDoctor={deletingDoctor}
+                refetch={refetch}
+                setDeletingDoctor={setDeletingDoctor}
             >
             </DeleteConfirm>}
         </div>

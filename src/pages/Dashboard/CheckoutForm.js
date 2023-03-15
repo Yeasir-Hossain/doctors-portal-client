@@ -10,9 +10,9 @@ const CheckoutForm = ({ appointment }) => {
     const [transactionID, setTransactionID] = useState('')
     const [clientSecret, setClientSecret] = useState("");
     const [processing, setProcessing] = useState(false);
-    const {_id, price, patient, patientName } = appointment
+    const { _id, price, patient, patientName } = appointment
     useEffect(() => {
-        fetch("https://still-temple-47292.herokuapp.com/create-payment-intent", {
+        fetch("https://doctors-portal-jzhn.onrender.com/create-payment-intent", {
             method: "POST",
             headers: {
                 "content-type": "application/json",
@@ -36,7 +36,7 @@ const CheckoutForm = ({ appointment }) => {
         if (card == null) {
             return;
         }
-        const { error} = await stripe.createPaymentMethod({
+        const { error } = await stripe.createPaymentMethod({
             type: 'card',
             card,
         });
@@ -44,7 +44,7 @@ const CheckoutForm = ({ appointment }) => {
         setCardError(error?.message || '');
         setSuccess('')
         setProcessing(true)
-        if(processing){
+        if (processing) {
             return <Loading></Loading>
         }
         //confirm card payment
@@ -72,16 +72,16 @@ const CheckoutForm = ({ appointment }) => {
             //payment info
             const payment = {
                 appointment: _id,
-                transactionId:paymentIntent.id
+                transactionId: paymentIntent.id
             }
-            fetch(`https://still-temple-47292.herokuapp.com/booking/${_id}`,{
-                method:"PATCH",
+            fetch(`https://doctors-portal-jzhn.onrender.com/booking/${_id}`, {
+                method: "PATCH",
                 headers: {
                     "content-type": "application/json",
                     'authorization': `Bearer ${localStorage.getItem('accessToken')}`
                 },
                 body: JSON.stringify(payment),
-            }).then(res=>res.json().then(data=>{
+            }).then(res => res.json().then(data => {
                 console.log(data);
                 setProcessing(false)
             }))
